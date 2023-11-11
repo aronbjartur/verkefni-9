@@ -38,9 +38,9 @@ function route() {
 
   const qs = new URLSearchParams(search);
   
-  const query = qs.get('query' ?? undefined)
-  const id = qs.get('id')
-  const ekkitil = qs.get('ekkitil')
+  const query = qs.get('query') ?? undefined;
+  const id = qs.get('id');
+  const ekkitil = qs.get('ekkitil');
 
   const parentElement = document.body;
 
@@ -59,7 +59,7 @@ function route() {
 
 // Bregst við því þegar við notum vafra til að fara til baka eða áfram.
 window.onpopstate = () => {
-  /* TODO bregðast við */
+  
 };
 
 // Athugum í byrjun hvað eigi að birta.

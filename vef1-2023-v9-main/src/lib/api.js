@@ -46,7 +46,7 @@ let response
 }
 
 if (!response.ok) {
-console.error('villa við að sækja gögn, ekki 200 staða', respose.status, respose.statusText);
+console.error('villa við að sækja gögn, ekki 200 staða', response.status, response.statusText);
 return null;
 }
 
@@ -70,3 +70,12 @@ try {
 export async function getLaunch(id) {
   /* TODO útfæra */
 }
+
+
+
+
+
+
+
+
+

@@ -63,4 +63,40 @@ main {
   max-width: var(--max-width);
 }
 
+
+.result {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.result:nth-child(even) {
+  background-color: lightgray;
+}
+
+
+.name {
+  font-weight: bold;
+}
+
+.statusName::before {
+  content: "🚀 ";
+}
+
+.mission::before {
+  content: "geimferð: ";
+  font-weight: bold;
+}
+
+
+.heading {
+  text-align: center;
+}
+
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
+
+
 /* TODO nánari stílar */

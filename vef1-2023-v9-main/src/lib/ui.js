@@ -84,7 +84,8 @@ return list;
 
   for (const result of results) {
     const resultElement = el('li', {class: 'result'},
-    el('span', {class: 'name'}, result.name),
+    el('a', {class: 'name', href: result.id}, result.name),
+    el('span', {class: 'statusName'}, result.status.name),
     el('span', {class: 'mission'}, result.mission)
     );
 
@@ -109,7 +110,7 @@ export async function searchAndRender(parentElement, searchForm, query) {
   return;
   }
 
-const resultElement = mainElement.querySelector('results');
+const resultsElement = mainElement.querySelector('.results');
 if (resultsElement) {
   resultsElement.remove();
 }
@@ -137,7 +138,7 @@ export function renderFrontpage(
 ) {
   const heading = el('h1', { class: 'heading', 'data-foo': 'bar'}, 'Geimskotaleitin 🚀');
   const searchForm = renderSearchForm(searchHandler, query);
-  const container = el('main', {}, heading, searchForm);
+  const container = el('main', { class: 'heading', 'data-foo': 'bar'}, heading, searchForm);
   parentElement.appendChild(container);
 
   if (!query) {
@@ -162,13 +163,36 @@ export async function renderDetails(parentElement, id) {
 
   parentElement.appendChild(container);
 
-  /* TODO setja loading state og sækja gögn */
+  // Setur loading state
+  setLoading(container);
 
-  // Tómt og villu state, við gerum ekki greinarmun á þessu tvennu, ef við
-  // myndum vilja gera það þyrftum við að skilgreina stöðu fyrir niðurstöðu
+  // sækir gögn
+  const result = await getLaunch(id);
+
+  // eyðir loading state
+  setNotLoading(container);
+
+  // höndlar tómt og error
   if (!result) {
-    /* TODO útfæra villu og tómt state */
+    const errorElement = el('div', { class: 'error' }, 'An error occurred or no data found');
+    container.appendChild(errorElement);
+    return;
   }
 
-  /* TODO útfæra ef gögn */
+  // prentari
+  const detailsElement = el('div', { class: 'details' },
+    el('p', {}, result.name),
+    el('p', {}, result.status.name),
+    el('p', {}, result.mission),
+  );
+  container.appendChild(detailsElement);
 }
+
+
+
+
+
+
+
+
+
